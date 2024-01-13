@@ -4,21 +4,21 @@ import photosDB from './photos.json';
 import friendsDB from './friends.json';
 
 export default {
-	getRandomElement(array) {
-		if (!array.length) {
-			return null;
-		}
+  getRandomElement(array) {
+    if (!array.length) {
+      return null;
+    }
 
-		const index = Math.round(Math.random() * (array.length - 1));
+    const index = Math.round(Math.random() * (array.length - 1));
 
-		return array[index];
-	},
+    return array[index];
+  },
 
-	getNextPhoto() {
-		const friend = this.getRandomElement(friendsDB),
-			photos = photosDB[friend.id],
-			photo = this.getRandomElement(photos);
+  getNextPhoto() {
+    const friend = this.getRandomElement(friendsDB),
+      photos = photosDB[friend.id],
+      photo = this.getRandomElement(photos);
 
-		return { friend, url: photo.url }
-	},
+    return { friend, url: photo.url };
+  },
 };
