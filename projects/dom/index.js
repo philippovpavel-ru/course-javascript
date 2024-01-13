@@ -11,6 +11,10 @@
    createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
  */
 function createDivWithText(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+
+  return div;
 }
 
 /*
@@ -22,6 +26,7 @@ function createDivWithText(text) {
    prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
+  where.prepend(what);
 }
 
 /*
@@ -44,6 +49,7 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
+  return [...where.children].filter((node) => node.nextElementSibling?.tagName === 'P');
 }
 
 /*
@@ -66,7 +72,7 @@ function findAllPSiblings(where) {
 function findError(where) {
   const result = [];
 
-  for (const child of where.childNodes) {
+  for (const child of where.children) {
     result.push(child.textContent);
   }
 
@@ -86,6 +92,13 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+  [...where.childNodes].forEach((child) => {
+    if (child.nodeType === 3) {
+      child.remove();
+    } else {
+      deleteTextNodes(child);
+    }
+  });
 }
 
 /*
@@ -109,6 +122,38 @@ function deleteTextNodes(where) {
    }
  */
 function collectDOMStat(root) {
+  const object = {
+    tags: {},
+    classes: {},
+    texts: 0,
+  };
+
+  function scan(element) {
+    [...element.childNodes].forEach((child) => {
+      if (child.nodeType === 3) {
+        object.texts += 1;
+      }
+
+      if (child.childNodes.length) {
+        scan(child);
+      }
+
+      if (child.nodeType === 1) {
+        object.tags[child.tagName] = object.tags[child.tagName]
+          ? object.tags[child.tagName] + 1
+          : 1;
+
+        child.classList?.forEach((className) => {
+          object.classes[className] = object.classes[className]
+            ? object.classes[className] + 1
+            : 1;
+        });
+      }
+    });
+  }
+
+  scan(root);
+  return object;
 }
 
 export {
