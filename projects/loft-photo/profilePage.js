@@ -34,9 +34,10 @@ export default {
         if (e.target.classList.contains('component-user-photo')) {
           // console.log(e.target);
           const photoId = e.target.dataset.id,
-            url = e.target.dataset.url;
+            url = e.target.dataset.url,
+            photoStats = await model.photoStats(photoId);
 
-          mainPage.setFriendAndPhoto(this.user, parseInt(photoId), url);
+          mainPage.setFriendAndPhoto(this.user, parseInt(photoId), url, photoStats);
           pages.openPage('main');
         }
       });
