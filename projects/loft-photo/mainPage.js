@@ -81,6 +81,10 @@ export default {
       }
     });
 
+    document.querySelector('.component-photo').addEventListener('click', async (e) => {
+      await this.getNextPhoto();
+    });
+
     document
       .querySelector('.component-header-profile-link')
       .addEventListener('click', async () => {

@@ -310,7 +310,8 @@ a {
     right: 24px;
 }
 
-.component-user-photos {
+.component-user-photos,
+.component-user-friends {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -345,4 +346,53 @@ a {
     font-size: 18px;
     line-height: 26px;
     margin-top: 8px;
+}
+
+.component-user-mode-panel {
+	display: flex;
+	justify-content: center;
+	column-gap: 15px;
+}
+
+.component-user-mode-panel a {
+	font-size: 15px;
+	border: 1px solid #333;
+	border-radius: 4px;
+	color: #333;
+	padding: 5px 10px;
+	margin-top: 5px;
+}
+
+.component-user-mode-panel a:hover {
+	color: #ccc;
+	background-color: #333;
+}
+
+.component-user-mode-panel a:active {
+	background-color: #e7e7e7;
+}
+
+.component-user-friend {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 104px;
+	height: 150px;
+}
+
+.component-user-friend-photo {
+	height: 72px;
+	width: 72px;
+	border-radius: 50%;
+
+	background-size: cover;
+	background-position: center;
+}
+
+.component-user-friend-name {
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 26px;
+	margin-top: 8px;
+	text-align: center;
 }
